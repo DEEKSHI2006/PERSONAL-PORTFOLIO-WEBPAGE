@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deekshitha | Portfolio</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: radial-gradient(circle at top left,#000,#0a0a0a); color:#fff; overflow-x:hidden; font-family:'Poppins',sans-serif; }
+
+/* Unified Color for Titles, Headings, Icons */
+:root {
+  --main-golden: linear-gradient(90deg, #FFD700, #FFA500);
+}
+
+/* Navbar */
+header {
+  position: fixed; top:0; width:100%; background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px); display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 3rem; border-bottom:1px solid rgba(255,215,0,0.2); z-index:1000;
+}
+header h1 { font-family:'Montserrat',sans-serif; font-size:1.8rem; letter-spacing:1px;
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow:0 0 12px rgba(255,165,0,0.5);
+}
+nav a { color:#fff; margin-left:2rem; text-decoration:none; transition:0.3s; font-weight:600; }
+nav a:hover { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* Hero */
+.hero {
+  height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:4rem;
+}
+.hero-title {
+  font-family:'Montserrat',sans-serif; font-size:5rem; font-weight:800; 
+  background: var(--main-golden);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height:1.1;
+  text-shadow: 0 0 20px rgba(255,165,0,0.5);
+}
+.hero-subtitle {
+  margin-top:1rem; font-size:2rem; font-weight:600;
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 12px rgba(255,165,0,0.5);
+}
+
+/* Home Icons */
+.icon-container { display:flex; justify-content:center; flex-wrap:wrap; gap:2.5rem; margin-top:4rem; }
+.icon-card {
+  width:120px; height:120px; border-radius:50%; background: rgba(255,255,255,0.08);
+  border:1px solid rgba(255,215,0,0.2); backdrop-filter: blur(12px); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 25px rgba(255,215,0,0.2);
+  text-decoration:none; transition:0.4s;
+}
+.icon-card:hover { transform:translateY(-6px) scale(1.05); box-shadow:0 0 35px rgba(255,215,0,0.5); }
+.icon-card i {
+  font-size:2.5rem; 
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom:0.3rem; text-shadow:0 0 15px rgba(255,165,0,0.5);
+}
+.icon-card span {
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-size:1rem; letter-spacing:0.5px;
+}
+
+/* Section Base */
+section { padding:8rem 10%; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+h2 { font-family:'Montserrat',sans-serif; font-size:2.8rem; margin-bottom:2rem;
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow:0 0 12px rgba(255,165,0,0.5); letter-spacing:1px; }
+
+/* About */
+.about {
+  max-width:900px; text-align:center; color:#fff; line-height:1.8; font-size:1.4rem; font-weight:700; margin-top:1rem;
+}
+
+/* Projects */
+.project-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; width:100%; }
+.glass {
+  background: rgba(255,255,255,0.08); border:1px solid rgba(255,215,0,0.2); backdrop-filter: blur(12px);
+  border-radius:15px; padding:2rem; box-shadow:0 0 25px rgba(255,215,0,0.15); transition:0.4s;
+}
+.glass:hover { transform:translateY(-6px); box-shadow:0 0 35px rgba(255,215,0,0.5); }
+.project-card h3 { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom:1rem; text-shadow:0 0 12px rgba(255,165,0,0.5); font-family:'Montserrat',sans-serif; }
+.project-card p { color:#eaeaea; margin-bottom:1.2rem; font-size:1rem; }
+
+/* Buttons */
+.btn-small {
+  background: rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.4); color:#FFD700; padding:0.5rem 1.2rem;
+  border-radius:25px; text-decoration:none; font-size:0.95rem; transition:0.3s; margin-right:0.5rem;
+}
+.btn-small:hover { background:#FFD700; color:#000; box-shadow:0 0 18px #FFD700; }
+
+/* Skills */
+.skills { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2rem; }
+.skill {
+  background: rgba(255,255,255,0.1); border:1px solid rgba(255,215,0,0.3);
+  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  padding:0.6rem 1.2rem; border-radius:25px; box-shadow:0 0 12px rgba(255,215,0,0.2); font-weight:600;
+}
+
+/* Contact */
+.contact p { color:#ccc; margin-bottom:1rem; font-size:1.1rem; }
+.contact a { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:600; }
+
+/* Footer */
+footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-top:1px solid rgba(255,215,0,0.2);
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+}
+
+/* Animations */
+@keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+.animate-fade-up { animation:fadeUp 1s ease-in-out forwards; }
+
+/* Responsive */
+@media (max-width:768px) {
+  header{flex-direction:column;text-align:center;} nav{margin-top:0.5rem;} section{padding:6rem 5%;}
+  .icon-container{gap:1.5rem;}
+  .hero-title { font-size:3.5rem; }
+  .hero-subtitle { font-size:1.5rem; }
+}
+</style>
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <h1>Deekshitha</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <h1 class="hero-title animate-fade-up">
+    Hello, I’m <span>Deekshitha</span><br>
+    <span>Web Developer</span>
+  </h1>
+  <p class="hero-subtitle animate-fade-up">I build interactive web apps, IoT projects & intelligent systems.</p>
+
+  <div class="icon-container animate-fade-up">
+    <a href="#about" class="icon-card"><i class="fas fa-user"></i><span>About</span></a>
+    <a href="#projects" class="icon-card"><i class="fas fa-folder-open"></i><span>Projects</span></a>
+    <a href="#skills" class="icon-card"><i class="fas fa-code"></i><span>Skills</span></a>
+    <a href="#contact" class="icon-card"><i class="fas fa-envelope"></i><span>Contact</span></a>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h2>About Me</h2>
+  <p class="about animate-fade-up">
+    I’m an <b> IT student</b> with a strong interest in creating <b>interactive web experiences</b> and <b>intelligent systems</b>.
+    I love working on projects that combine <b>creativity</b> and <b>technology</b> — whether it’s designing <b>responsive web apps</b>,
+    connecting <b>IoT devices</b>, or building <b>ML models</b>. My goal is to become a <b>full-stack developer</b> who bridges <b>hardware</b> and <b>intelligent software</b>.
+  </p>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="project-container">
+    <div class="project-card glass animate-fade-up">
+      <h3>🌱 Green Grids</h3>
+      <p>IoT + ML project predicting soil type and suggesting fertilizers using ESP32 sensors.</p>
+      <a href="https://github.com/DEEKSHI2006/GREEN-GRIDS-FINAL-UI" class="btn-small">🔗 Code</a><a href="https://v0-green-grids-project.vercel.app/" class="btn-small">🌐 Demo</a>
+    </div>
+    <div class="project-card glass animate-fade-up">
+      <h3>🧾 Student Forms</h3>
+      <p>Form management system for student data with validation and clean responsive UI.</p>
+      <a href="https://github.com/DEEKSHI2006/FORMS-NEON-GREEN-" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/FORMS-NEON-GREEN-/" class="btn-small">🌐 Demo</a>
+    </div>
+    <div class="project-card glass animate-fade-up">
+      <h3>💬 MyChatroom</h3>
+      <p>Realtime Firebase chat app with dark mode, emoji reactions, and file sharing.</p>
+      <a href="https://github.com/DEEKSHI2006/MYCHATROOM" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/MYCHATROOM/" class="btn-small">🌐 Demo</a>
+    </div>
+    <div class="project-card glass animate-fade-up">
+      <h3>✈️ TravelBliss</h3>
+      <p>Travel planner web app offering destination insights, weather, and booking suggestions.</p>
+      <a href="https://github.com/DEEKSHI2006/TravelBliss" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/TravelBliss/" class="btn-small">🌐 Demo</a>
+    </div>
+    <div class="project-card glass animate-fade-up">
+      <h3>☁️ Weather Dashboard</h3>
+      <p>Live weather app using OpenWeather API showing temperature and conditions dynamically.</p>
+      <a href="https://github.com/DEEKSHI2006/weather-dashboard" class="btn-small">🔗 Code</a><a href="https://weather-dashboard-ten-eta.vercel.app/" class="btn-small">🌐 Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills animate-fade-up">
+    <span class="skill">HTML5</span>
+    <span class="skill">CSS3</span>
+    <span class="skill">JavaScript</span>
+    <span class="skill">React</span>
+    <span class="skill">Firebase</span>
+    <span class="skill">Python</span>
+    <span class="skill">Machine Learning</span>
+    <span class="skill">IoT (ESP32)</span>
+    <span class="skill">Git & GitHub</span>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <a href="mailto:sdeekshi32@gmail.com" target="_blank" class="contact-icon">
+  <i class="fas fa-envelope"></i>
+</a>
+
+  <p>GitHub: <a href="https://github.com/DEEKSHI2006/" target="_blank">github.com/deekshitha</a></p>
+  
+</section>
+
+<footer>© 2025 Deekshitha | Designed with ⚡ Glassmorphism & Love</footer>
+
+</body>
+</html>
