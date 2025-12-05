@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Deekshitha | Portfolio</title>
 
 <!-- Google Fonts -->
@@ -14,6 +14,18 @@
 html { scroll-behavior: smooth; }
 body { background: radial-gradient(circle at top left,#000,#0a0a0a); color:#fff; overflow-x:hidden; font-family:'Poppins',sans-serif; }
 
+/* Particle canvas (full screen behind content) */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  z-index: 0;               /* behind everything */
+  pointer-events: none;     /* don't block clicks */
+  display: block;
+}
+
 /* Unified Color for Titles, Headings, Icons */
 :root {
   --main-golden: linear-gradient(90deg, #FFD700, #FFA500);
@@ -23,7 +35,7 @@ body { background: radial-gradient(circle at top left,#000,#0a0a0a); color:#fff;
 header {
   position: fixed; top:0; width:100%; background: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px); display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 3rem; border-bottom:1px solid rgba(255,215,0,0.2); z-index:1000;
+  padding:1rem 3rem; border-bottom:1px solid rgba(255,215,0,0.2); z-index:1001; /* above canvas */
 }
 header h1 { font-family:'Montserrat',sans-serif; font-size:1.8rem; letter-spacing:1px;
   background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -35,18 +47,25 @@ nav a:hover { background: var(--main-golden); -webkit-background-clip: text; -we
 /* Hero */
 .hero {
   height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:4rem;
+  position: relative; z-index: 2; /* above canvas */
 }
 .hero-title {
-  font-family:'Montserrat',sans-serif; font-size:5rem; font-weight:800; 
+  font-family:'Montserrat',sans-serif; 
+  font-size:3rem;      /* updated size for h4 */
+  font-weight:800;
   background: var(--main-golden);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height:1.1;
+  line-height:1.2;
   text-shadow: 0 0 20px rgba(255,165,0,0.5);
 }
 .hero-subtitle {
-  margin-top:1rem; font-size:2rem; font-weight:600;
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-top:1rem;
+  font-size:1.6rem;
+  font-weight:600;
+  background: var(--main-golden);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-shadow: 0 0 12px rgba(255,165,0,0.5);
 }
 
@@ -70,7 +89,7 @@ nav a:hover { background: var(--main-golden); -webkit-background-clip: text; -we
 }
 
 /* Section Base */
-section { padding:8rem 10%; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+section { padding:8rem 10%; display:flex; flex-direction:column; align-items:center; justify-content:center; position: relative; z-index:2; }
 h2 { font-family:'Montserrat',sans-serif; font-size:2.8rem; margin-bottom:2rem;
   background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow:0 0 12px rgba(255,165,0,0.5); letter-spacing:1px; }
@@ -112,7 +131,7 @@ h2 { font-family:'Montserrat',sans-serif; font-size:2.8rem; margin-bottom:2rem;
 
 /* Footer */
 footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-top:1px solid rgba(255,215,0,0.2);
-  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); position: relative; z-index:2; 
 }
 
 /* Animations */
@@ -121,10 +140,14 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
 
 /* Responsive */
 @media (max-width:768px) {
-  header{flex-direction:column;text-align:center;} nav{margin-top:0.5rem;} section{padding:6rem 5%;}
+  header{flex-direction:column;text-align:center;} 
+  nav{margin-top:0.5rem;} 
+  section{padding:6rem 5%;}
+
   .icon-container{gap:1.5rem;}
-  .hero-title { font-size:3.5rem; }
-  .hero-subtitle { font-size:1.5rem; }
+
+  .hero-title { font-size:2.2rem; }      /* MOBILE FIX */
+  .hero-subtitle { font-size:1.2rem; }   /* MOBILE FIX */
 }
 </style>
 
@@ -132,6 +155,9 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+<!-- Particle canvas (must be first element so it stays behind) -->
+<canvas id="particles-canvas"></canvas>
 
 <header>
   <h1>Deekshitha</h1>
@@ -146,10 +172,10 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
 
 <!-- Hero -->
 <section id="home" class="hero">
-  <h1 class="hero-title animate-fade-up">
+  <h4 class="hero-title animate-fade-up">
     Hello, I’m <span>Deekshitha</span><br>
     <span>Web Developer</span>
-  </h1>
+  </h4>
   <p class="hero-subtitle animate-fade-up">I build interactive web apps, IoT projects & intelligent systems.</p>
 
   <div class="icon-container animate-fade-up">
@@ -177,27 +203,36 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
     <div class="project-card glass animate-fade-up">
       <h3>🌱 Green Grids</h3>
       <p>IoT + ML project predicting soil type and suggesting fertilizers using ESP32 sensors.</p>
-      <a href="https://github.com/DEEKSHI2006/GREEN-GRIDS-FINAL-UI" class="btn-small">🔗 Code</a><a href="https://v0-green-grids-project.vercel.app/" class="btn-small">🌐 Demo</a>
+      <a href="https://github.com/DEEKSHI2006/GREEN-GRIDS-FINAL-UI" class="btn-small">🔗 Code</a>
+      <a href="https://v0-green-grids-project.vercel.app/" class="btn-small">🌐 Demo</a>
     </div>
+
     <div class="project-card glass animate-fade-up">
       <h3>🧾 Student Forms</h3>
       <p>Form management system for student data with validation and clean responsive UI.</p>
-      <a href="https://github.com/DEEKSHI2006/FORMS-NEON-GREEN-" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/FORMS-NEON-GREEN-/" class="btn-small">🌐 Demo</a>
+      <a href="https://github.com/DEEKSHI2006/FORMS-NEON-GREEN-" class="btn-small">🔗 Code</a>
+      <a href="https://deekshi2006.github.io/FORMS-NEON-GREEN-/" class="btn-small">🌐 Demo</a>
     </div>
+
     <div class="project-card glass animate-fade-up">
       <h3>💬 MyChatroom</h3>
       <p>Realtime Firebase chat app with dark mode, emoji reactions, and file sharing.</p>
-      <a href="https://github.com/DEEKSHI2006/MYCHATROOM" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/MYCHATROOM/" class="btn-small">🌐 Demo</a>
+      <a href="https://github.com/DEEKSHI2006/MYCHATROOM" class="btn-small">🔗 Code</a>
+      <a href="https://deekshi2006.github.io/MYCHATROOM/" class="btn-small">🌐 Demo</a>
     </div>
+
     <div class="project-card glass animate-fade-up">
       <h3>✈️ TravelBliss</h3>
       <p>Travel planner web app offering destination insights, weather, and booking suggestions.</p>
-      <a href="https://github.com/DEEKSHI2006/TravelBliss" class="btn-small">🔗 Code</a><a href="https://deekshi2006.github.io/TravelBliss/" class="btn-small">🌐 Demo</a>
+      <a href="https://github.com/DEEKSHI2006/TravelBliss" class="btn-small">🔗 Code</a>
+      <a href="https://deekshi2006.github.io/TravelBliss/" class="btn-small">🌐 Demo</a>
     </div>
+
     <div class="project-card glass animate-fade-up">
       <h3>☁️ Weather Dashboard</h3>
       <p>Live weather app using OpenWeather API showing temperature and conditions dynamically.</p>
-      <a href="https://github.com/DEEKSHI2006/weather-dashboard" class="btn-small">🔗 Code</a><a href="https://weather-dashboard-ten-eta.vercel.app/" class="btn-small">🌐 Demo</a>
+      <a href="https://github.com/DEEKSHI2006/weather-dashboard" class="btn-small">🔗 Code</a>
+      <a href="https://weather-dashboard-ten-eta.vercel.app/" class="btn-small">🌐 Demo</a>
     </div>
   </div>
 </section>
@@ -222,14 +257,139 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
 <section id="contact" class="contact">
   <h2>Contact</h2>
   <a href="mailto:sdeekshi32@gmail.com" target="_blank" class="contact-icon">
-  <i class="fas fa-envelope"></i>
-</a>
+    <i class="fas fa-envelope"></i>
+  </a>
 
   <p>GitHub: <a href="https://github.com/DEEKSHI2006/" target="_blank">github.com/deekshitha</a></p>
-  
 </section>
 
 <footer>© 2025 Deekshitha | Designed with ⚡ Glassmorphism & Love</footer>
+
+<!-- Particle system script -->
+<script>
+/*
+  Lightweight golden particle system.
+  - Matches your gold palette.
+  - Reduces particle count on small screens.
+  - Non-blocking and performant.
+*/
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let width = 0;
+  let height = 0;
+  let particleCount = 0;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    width = canvas.width = Math.floor(window.innerWidth * dpr);
+    height = canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initParticles();
+  }
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  function initParticles() {
+    particles = [];
+    // scale particle count by viewport size but keep it reasonable
+    const base = Math.max(12, Math.floor((window.innerWidth * window.innerHeight) / 120000)); // roughly scales
+    // on small screens keep fewer
+    particleCount = window.innerWidth < 768 ? Math.min(base, 18) : Math.min(base, 70);
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(createParticle());
+    }
+  }
+
+  function createParticle() {
+    // position (some spawn around hero center to look nice)
+    const x = rand(0, window.innerWidth);
+    const y = rand(0, window.innerHeight);
+    // velocity
+    const angle = rand(0, Math.PI * 2);
+    const speed = rand(0.05, 0.6);
+    // size
+    const size = rand(0.6, 3.6);
+    // life and alpha
+    const life = rand(80, 420);
+    const hue = rand(40, 50); // golden-yellow hue (approx)
+    const sat = rand(80, 100);
+    const light = rand(50, 65);
+    return { x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, size, life, age: 0, hue, sat, light, alpha: rand(0.08, 0.9) };
+  }
+
+  function update() {
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.age++;
+      // gentle gravity/float
+      p.vy += 0.002 * (p.size * 0.2);
+      // fade in/out based on age
+      p.alpha = Math.max(0, Math.sin((p.age / p.life) * Math.PI) * 0.95);
+      if (p.age > p.life || p.x < -50 || p.x > window.innerWidth + 50 || p.y < -50 || p.y > window.innerHeight + 50) {
+        // replace particle
+        particles[i] = createParticle();
+      }
+    }
+  }
+
+  function draw() {
+    // subtle clear with translucency to create trailing glow
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const p of particles) {
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
+      const color = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha})`;
+      grad.addColorStop(0, color);
+      grad.addColorStop(0.3, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha * 0.6})`);
+      grad.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  let rafId;
+  function loop() {
+    update();
+    draw();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  // Pause animation when tab not visible (saves CPU)
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else rafId = requestAnimationFrame(loop);
+  });
+
+  // initialize
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', () => {
+    resize();
+    rafId = requestAnimationFrame(loop);
+  });
+
+  // optional: slow down on low power devices using prefers-reduced-motion
+  const q = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (q.matches) {
+    // drastically reduce animations
+    cancelAnimationFrame(rafId);
+    // create a few static, very subtle particles
+    particles = [];
+    for (let i = 0; i < 12; i++) {
+      particles.push(createParticle());
+    }
+    draw();
+  }
+})();
+</script>
 
 </body>
 </html>
