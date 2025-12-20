@@ -9,6 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+  #typing-text {
+  border-right: 3px solid #FFD700;
+  padding-right: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  50% { border-color: transparent; }
+}
+
 /* Reset */
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
@@ -173,9 +185,10 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
 <!-- Hero -->
 <section id="home" class="hero">
   <h4 class="hero-title animate-fade-up">
-    Hello, I’m <span>Deekshitha</span><br>
-    <span>Web Developer</span>
-  </h4>
+  Hello, I’m <span>Deekshitha</span><br>
+  <span id="typing-text"></span>
+</h4>
+
   <p class="hero-subtitle animate-fade-up">I build interactive web apps, IoT projects & intelligent systems.</p>
 
   <div class="icon-container animate-fade-up">
@@ -389,6 +402,19 @@ footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-t
     draw();
   }
 })();
+const typingText = "Web Developer";
+let index = 0;
+
+function typeEffect() {
+  if (index < typingText.length) {
+    document.getElementById("typing-text").textContent += typingText.charAt(index);
+    index++;
+    setTimeout(typeEffect, 120);
+  }
+}
+
+window.addEventListener("load", typeEffect);
+
 </script>
 
 </body>
