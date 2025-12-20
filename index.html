@@ -1,441 +1,668 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Deekshitha | Portfolio</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Deekshitha | Portfolio</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
+    <style>
+      #typing-text {
+        border-right: 3px solid #ffd700;
+        padding-right: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: blinkCursor 0.8s infinite;
+      }
 
-<style>
-  #typing-text {
-  border-right: 3px solid #FFD700;
-  padding-right: 6px;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: blinkCursor 0.8s infinite;
-}
+      @keyframes blinkCursor {
+        50% {
+          border-color: transparent;
+        }
+      }
 
-@keyframes blinkCursor {
-  50% { border-color: transparent; }
-}
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: radial-gradient(circle at top left, #000, #0a0a0a);
+        color: #fff;
+        overflow-x: hidden;
+        font-family: "Poppins", sans-serif;
+      }
 
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { background: radial-gradient(circle at top left,#000,#0a0a0a); color:#fff; overflow-x:hidden; font-family:'Poppins',sans-serif; }
+      /* Particle canvas (full screen behind content) */
+      #particles-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* behind everything */
+        pointer-events: none; /* don't block clicks */
+        display: block;
+      }
 
-/* Particle canvas (full screen behind content) */
-#particles-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
-  height:100%;
-  z-index: 0;               /* behind everything */
-  pointer-events: none;     /* don't block clicks */
-  display: block;
-}
+      /* Unified Color for Titles, Headings, Icons */
+      :root {
+        --main-golden: linear-gradient(90deg, #ffd700, #ffa500);
+      }
 
-/* Unified Color for Titles, Headings, Icons */
-:root {
-  --main-golden: linear-gradient(90deg, #FFD700, #FFA500);
-}
+      /* Navbar */
 
-/* Navbar */
-header {
-  position: fixed; top:0; width:100%; background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px); display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 3rem; border-bottom:1px solid rgba(255,215,0,0.2); z-index:1001; /* above canvas */
-}
-header h1 { font-family:'Montserrat',sans-serif; font-size:1.8rem; letter-spacing:1px;
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  text-shadow:0 0 12px rgba(255,165,0,0.5);
-}
-nav a { color:#fff; margin-left:2rem; text-decoration:none; transition:0.3s; font-weight:600; }
-nav a:hover { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      /* Hero */
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top: 0; /* 👈 remove extra gap */
+      }
 
-/* Hero */
-.hero {
-  height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:4rem;
-  position: relative; z-index: 2; /* above canvas */
-}
-.hero-title {
-  font-family:'Montserrat',sans-serif; 
-  font-size:3rem;      /* updated size for h4 */
-  font-weight:800;
-  background: var(--main-golden);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height:1.2;
-  text-shadow: 0 0 20px rgba(255,165,0,0.5);
-}
-.hero-subtitle {
-  margin-top:1rem;
-  font-size:1.6rem;
-  font-weight:600;
-  background: var(--main-golden);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 12px rgba(255,165,0,0.5);
-}
+      .hero-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 3rem; /* updated size for h4 */
+        font-weight: 800;
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+        text-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+      }
+      .hero-subtitle {
+        margin-top: 1rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 12px rgba(255, 165, 0, 0.5);
+      }
 
-/* Home Icons */
-.icon-container { display:flex; justify-content:center; flex-wrap:wrap; gap:2.5rem; margin-top:4rem; }
-.icon-card {
-  width:120px; height:120px; border-radius:50%; background: rgba(255,255,255,0.08);
-  border:1px solid rgba(255,215,0,0.2); backdrop-filter: blur(12px); display:flex; flex-direction:column;
-  align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 25px rgba(255,215,0,0.2);
-  text-decoration:none; transition:0.4s;
-}
-.icon-card:hover { transform:translateY(-6px) scale(1.05); box-shadow:0 0 35px rgba(255,215,0,0.5); }
-.icon-card i {
-  font-size:2.5rem; 
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom:0.3rem; text-shadow:0 0 15px rgba(255,165,0,0.5);
-}
-.icon-card span {
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  font-size:1rem; letter-spacing:0.5px;
-}
+      /* Home Icons */
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        margin-top: 4rem;
+      }
+      .icon-card {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+        text-decoration: none;
+        transition: 0.4s;
+      }
+      .icon-card:hover {
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.5);
+      }
+      .icon-card i {
+        font-size: 2.5rem;
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.3rem;
+        text-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+      }
+      .icon-card span {
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+      }
 
-/* Section Base */
-section { padding:8rem 10%; display:flex; flex-direction:column; align-items:center; justify-content:center; position: relative; z-index:2; }
-h2 { font-family:'Montserrat',sans-serif; font-size:2.8rem; margin-bottom:2rem;
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  text-shadow:0 0 12px rgba(255,165,0,0.5); letter-spacing:1px; }
+      /* Section Base */
+      section {
+        padding: 8rem 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+      h2 {
+        font-family: "Montserrat", sans-serif;
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 12px rgba(255, 165, 0, 0.5);
+        letter-spacing: 1px;
+      }
 
-/* About */
-.about {
-  max-width:850px;
-  text-align:center;
-  color:#eaeaea;
-  line-height:1.6;
-  font-size:1.05rem;
-  font-weight:400;
-  font-family: 'Inter', sans-serif;  /* 👈 NEW FONT */
-  margin-top:1rem;
-}
+      /* About */
+      .about {
+        max-width: 850px;
+        text-align: center;
+        color: #eaeaea;
+        line-height: 1.6;
+        font-size: 1.05rem;
+        font-weight: 400;
+        font-family: "Inter", sans-serif; /* 👈 NEW FONT */
+        margin-top: 1rem;
+      }
 
+      /* Projects */
+      .project-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        width: 100%;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        backdrop-filter: blur(12px);
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+        transition: 0.4s;
+      }
+      .glass:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.5);
+      }
+      .project-card h3 {
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 12px rgba(255, 165, 0, 0.5);
+        font-family: "Montserrat", sans-serif;
+      }
+      .project-card p {
+        color: #eaeaea;
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+      }
 
+      /* Buttons */
+      .btn-small {
+        background: rgba(255, 215, 0, 0.15);
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #ffd700;
+        padding: 0.5rem 1.2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: 0.3s;
+        margin-right: 0.5rem;
+      }
+      .btn-small:hover {
+        background: #ffd700;
+        color: #000;
+        box-shadow: 0 0 18px #ffd700;
+      }
 
-/* Projects */
-.project-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; width:100%; }
-.glass {
-  background: rgba(255,255,255,0.08); border:1px solid rgba(255,215,0,0.2); backdrop-filter: blur(12px);
-  border-radius:15px; padding:2rem; box-shadow:0 0 25px rgba(255,215,0,0.15); transition:0.4s;
-}
-.glass:hover { transform:translateY(-6px); box-shadow:0 0 35px rgba(255,215,0,0.5); }
-.project-card h3 { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  margin-bottom:1rem; text-shadow:0 0 12px rgba(255,165,0,0.5); font-family:'Montserrat',sans-serif; }
-.project-card p { color:#eaeaea; margin-bottom:1.2rem; font-size:1rem; }
+      /* Skills */
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .skill {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding: 0.6rem 1.2rem;
+        border-radius: 25px;
+        box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+        font-weight: 600;
+      }
 
-/* Buttons */
-.btn-small {
-  background: rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.4); color:#FFD700; padding:0.5rem 1.2rem;
-  border-radius:25px; text-decoration:none; font-size:0.95rem; transition:0.3s; margin-right:0.5rem;
-}
-.btn-small:hover { background:#FFD700; color:#000; box-shadow:0 0 18px #FFD700; }
+      /* Contact */
+      .contact p {
+        color: #ccc;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+      .contact a {
+        background: var(--main-golden);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 600;
+      }
 
-/* Skills */
-.skills { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2rem; }
-.skill {
-  background: rgba(255,255,255,0.1); border:1px solid rgba(255,215,0,0.3);
-  background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  padding:0.6rem 1.2rem; border-radius:25px; box-shadow:0 0 12px rgba(255,215,0,0.2); font-weight:600;
-}
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 1rem;
+        color: #aaa;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        position: relative;
+        z-index: 2;
+      }
 
-/* Contact */
-.contact p { color:#ccc; margin-bottom:1rem; font-size:1.1rem; }
-.contact a { background: var(--main-golden); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight:600; }
+      /* Animations */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-up {
+        animation: fadeUp 1s ease-in-out forwards;
+      }
 
-/* Footer */
-footer { text-align:center; padding:1rem; color:#aaa; font-size:0.9rem; border-top:1px solid rgba(255,215,0,0.2);
-  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); position: relative; z-index:2; 
-}
+      /* Responsive */
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+        nav {
+          margin-top: 0.5rem;
+        }
+        section {
+          padding: 6rem 5%;
+        }
 
-/* Animations */
-@keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-.animate-fade-up { animation:fadeUp 1s ease-in-out forwards; }
+        .icon-container {
+          gap: 1.5rem;
+        }
 
-/* Responsive */
-@media (max-width:768px) {
-  header{flex-direction:column;text-align:center;} 
-  nav{margin-top:0.5rem;} 
-  section{padding:6rem 5%;}
+        .hero-title {
+          font-size: 2.2rem;
+        }
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
 
-  .icon-container{gap:1.5rem;}
+        /* 👇 FINAL MOBILE SIZE */
+        .about {
+          font-size: 0.95rem;
+          line-height: 1.55;
+        }
+      }
+    </style>
 
-  .hero-title { font-size:2.2rem; }
-  .hero-subtitle { font-size:1.2rem; }
+    <!-- FontAwesome -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Particle canvas (must be first element so it stays behind) -->
+    <canvas id="particles-canvas"></canvas>
 
-  /* 👇 FINAL MOBILE SIZE */
-  .about {
-    font-size:0.95rem;
-    line-height:1.55;
-  }
-}
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <h4 class="hero-title animate-fade-up">
+        Hello, I’m <span>Deekshitha</span><br />
+        <span id="typing-text"></span>
+      </h4>
 
+      <p class="hero-subtitle animate-fade-up">
+        I build interactive web apps, IoT projects & intelligent systems.
+      </p>
 
+      <div class="icon-container animate-fade-up">
+        <a href="#about" class="icon-card"
+          ><i class="fas fa-user"></i><span>About</span></a
+        >
+        <a href="#projects" class="icon-card"
+          ><i class="fas fa-folder-open"></i><span>Projects</span></a
+        >
+        <a href="#skills" class="icon-card"
+          ><i class="fas fa-code"></i><span>Skills</span></a
+        >
+        <a href="#contact" class="icon-card"
+          ><i class="fas fa-envelope"></i><span>Contact</span></a
+        >
+      </div>
+    </section>
 
-</style>
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p class="about animate-fade-up">
+        I’m an <b> IT student</b> with a strong interest in creating
+        <b>interactive web experiences</b> and <b>intelligent systems</b>. I
+        love working on projects that combine <b>creativity</b> and
+        <b>technology</b> — whether it’s designing <b>responsive web apps</b>,
+        connecting <b>IoT devices</b>, or building <b>ML models</b>. My goal is
+        to become a <b>full-stack developer</b> who bridges <b>hardware</b> and
+        <b>intelligent software</b>.
+      </p>
+    </section>
 
-<!-- FontAwesome -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <!-- Projects -->
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div class="project-container">
+        <div class="project-card glass animate-fade-up">
+          <h3>🌱 Green Grids</h3>
+          <p>
+            IoT + ML project predicting soil type and suggesting fertilizers
+            using ESP32 sensors.
+          </p>
+          <a
+            href="https://github.com/DEEKSHI2006/GREEN-GRIDS-FINAL-UI"
+            class="btn-small"
+            >🔗 Code</a
+          >
+          <a href="https://v0-green-grids-project.vercel.app/" class="btn-small"
+            >🌐 Demo</a
+          >
+        </div>
 
-<!-- Particle canvas (must be first element so it stays behind) -->
-<canvas id="particles-canvas"></canvas>
+        <div class="project-card glass animate-fade-up">
+          <h3>🧾 Student Forms</h3>
+          <p>
+            Form management system for student data with validation and clean
+            responsive UI.
+          </p>
+          <a
+            href="https://github.com/DEEKSHI2006/FORMS-NEON-GREEN-"
+            class="btn-small"
+            >🔗 Code</a
+          >
+          <a
+            href="https://deekshi2006.github.io/FORMS-NEON-GREEN-/"
+            class="btn-small"
+            >🌐 Demo</a
+          >
+        </div>
 
-<header>
-  <h1>Deekshitha</h1>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+        <div class="project-card glass animate-fade-up">
+          <h3>💬 MyChatroom</h3>
+          <p>
+            Realtime Firebase chat app with dark mode, emoji reactions, and file
+            sharing.
+          </p>
+          <a href="https://github.com/DEEKSHI2006/MYCHATROOM" class="btn-small"
+            >🔗 Code</a
+          >
+          <a href="https://deekshi2006.github.io/MYCHATROOM/" class="btn-small"
+            >🌐 Demo</a
+          >
+        </div>
 
-<!-- Hero -->
-<section id="home" class="hero">
-  <h4 class="hero-title animate-fade-up">
-  Hello, I’m <span>Deekshitha</span><br>
-  <span id="typing-text"></span>
-</h4>
+        <div class="project-card glass animate-fade-up">
+          <h3>✈️ TravelBliss</h3>
+          <p>
+            Travel planner web app offering destination insights, weather, and
+            booking suggestions.
+          </p>
+          <a href="https://github.com/DEEKSHI2006/TravelBliss" class="btn-small"
+            >🔗 Code</a
+          >
+          <a href="https://deekshi2006.github.io/TravelBliss/" class="btn-small"
+            >🌐 Demo</a
+          >
+        </div>
 
-  <p class="hero-subtitle animate-fade-up">I build interactive web apps, IoT projects & intelligent systems.</p>
+        <div class="project-card glass animate-fade-up">
+          <h3>☁️ Weather Dashboard</h3>
+          <p>
+            Live weather app using OpenWeather API showing temperature and
+            conditions dynamically.
+          </p>
+          <a
+            href="https://github.com/DEEKSHI2006/weather-dashboard"
+            class="btn-small"
+            >🔗 Code</a
+          >
+          <a
+            href="https://weather-dashboard-ten-eta.vercel.app/"
+            class="btn-small"
+            >🌐 Demo</a
+          >
+        </div>
+      </div>
+    </section>
 
-  <div class="icon-container animate-fade-up">
-    <a href="#about" class="icon-card"><i class="fas fa-user"></i><span>About</span></a>
-    <a href="#projects" class="icon-card"><i class="fas fa-folder-open"></i><span>Projects</span></a>
-    <a href="#skills" class="icon-card"><i class="fas fa-code"></i><span>Skills</span></a>
-    <a href="#contact" class="icon-card"><i class="fas fa-envelope"></i><span>Contact</span></a>
-  </div>
-</section>
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills animate-fade-up">
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Firebase</span>
+        <span class="skill">Python</span>
+        <span class="skill">Machine Learning</span>
+        <span class="skill">IoT (ESP32)</span>
+        <span class="skill">Git & GitHub</span>
+      </div>
+    </section>
 
-<!-- About -->
-<section id="about">
-  <h2>About Me</h2>
-  <p class="about animate-fade-up">
-    I’m an <b> IT student</b> with a strong interest in creating <b>interactive web experiences</b> and <b>intelligent systems</b>.
-    I love working on projects that combine <b>creativity</b> and <b>technology</b> — whether it’s designing <b>responsive web apps</b>,
-    connecting <b>IoT devices</b>, or building <b>ML models</b>. My goal is to become a <b>full-stack developer</b> who bridges <b>hardware</b> and <b>intelligent software</b>.
-  </p>
-</section>
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <a
+        href="mailto:sdeekshi32@gmail.com"
+        target="_blank"
+        class="contact-icon"
+      >
+        <i class="fas fa-envelope"></i>
+      </a>
 
-<!-- Projects -->
-<section id="projects">
-  <h2>My Projects</h2>
-  <div class="project-container">
-    <div class="project-card glass animate-fade-up">
-      <h3>🌱 Green Grids</h3>
-      <p>IoT + ML project predicting soil type and suggesting fertilizers using ESP32 sensors.</p>
-      <a href="https://github.com/DEEKSHI2006/GREEN-GRIDS-FINAL-UI" class="btn-small">🔗 Code</a>
-      <a href="https://v0-green-grids-project.vercel.app/" class="btn-small">🌐 Demo</a>
-    </div>
+      <p>
+        GitHub:
+        <a href="https://github.com/DEEKSHI2006/" target="_blank"
+          >github.com/deekshitha</a
+        >
+      </p>
+    </section>
 
-    <div class="project-card glass animate-fade-up">
-      <h3>🧾 Student Forms</h3>
-      <p>Form management system for student data with validation and clean responsive UI.</p>
-      <a href="https://github.com/DEEKSHI2006/FORMS-NEON-GREEN-" class="btn-small">🔗 Code</a>
-      <a href="https://deekshi2006.github.io/FORMS-NEON-GREEN-/" class="btn-small">🌐 Demo</a>
-    </div>
+    <footer>© 2025 Deekshitha | Designed with ⚡ Glassmorphism & Love</footer>
 
-    <div class="project-card glass animate-fade-up">
-      <h3>💬 MyChatroom</h3>
-      <p>Realtime Firebase chat app with dark mode, emoji reactions, and file sharing.</p>
-      <a href="https://github.com/DEEKSHI2006/MYCHATROOM" class="btn-small">🔗 Code</a>
-      <a href="https://deekshi2006.github.io/MYCHATROOM/" class="btn-small">🌐 Demo</a>
-    </div>
-
-    <div class="project-card glass animate-fade-up">
-      <h3>✈️ TravelBliss</h3>
-      <p>Travel planner web app offering destination insights, weather, and booking suggestions.</p>
-      <a href="https://github.com/DEEKSHI2006/TravelBliss" class="btn-small">🔗 Code</a>
-      <a href="https://deekshi2006.github.io/TravelBliss/" class="btn-small">🌐 Demo</a>
-    </div>
-
-    <div class="project-card glass animate-fade-up">
-      <h3>☁️ Weather Dashboard</h3>
-      <p>Live weather app using OpenWeather API showing temperature and conditions dynamically.</p>
-      <a href="https://github.com/DEEKSHI2006/weather-dashboard" class="btn-small">🔗 Code</a>
-      <a href="https://weather-dashboard-ten-eta.vercel.app/" class="btn-small">🌐 Demo</a>
-    </div>
-  </div>
-</section>
-
-<!-- Skills -->
-<section id="skills">
-  <h2>Skills</h2>
-  <div class="skills animate-fade-up">
-    <span class="skill">HTML5</span>
-    <span class="skill">CSS3</span>
-    <span class="skill">JavaScript</span>
-    <span class="skill">React</span>
-    <span class="skill">Firebase</span>
-    <span class="skill">Python</span>
-    <span class="skill">Machine Learning</span>
-    <span class="skill">IoT (ESP32)</span>
-    <span class="skill">Git & GitHub</span>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact" class="contact">
-  <h2>Contact</h2>
-  <a href="mailto:sdeekshi32@gmail.com" target="_blank" class="contact-icon">
-    <i class="fas fa-envelope"></i>
-  </a>
-
-  <p>GitHub: <a href="https://github.com/DEEKSHI2006/" target="_blank">github.com/deekshitha</a></p>
-</section>
-
-<footer>© 2025 Deekshitha | Designed with ⚡ Glassmorphism & Love</footer>
-
-<!-- Particle system script -->
-<script>
-/*
+    <!-- Particle system script -->
+    <script>
+      /*
   Lightweight golden particle system.
   - Matches your gold palette.
   - Reduces particle count on small screens.
   - Non-blocking and performant.
 */
-(function() {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let width = 0;
-  let height = 0;
-  let particleCount = 0;
+      (function () {
+        const canvas = document.getElementById("particles-canvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let width = 0;
+        let height = 0;
+        let particleCount = 0;
 
-  function resize() {
-    const dpr = window.devicePixelRatio || 1;
-    width = canvas.width = Math.floor(window.innerWidth * dpr);
-    height = canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    initParticles();
-  }
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          width = canvas.width = Math.floor(window.innerWidth * dpr);
+          height = canvas.height = Math.floor(window.innerHeight * dpr);
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = window.innerHeight + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          initParticles();
+        }
 
-  function rand(min, max) { return Math.random() * (max - min) + min; }
+        function rand(min, max) {
+          return Math.random() * (max - min) + min;
+        }
 
-  function initParticles() {
-    particles = [];
-    // scale particle count by viewport size but keep it reasonable
-    const base = Math.max(12, Math.floor((window.innerWidth * window.innerHeight) / 120000)); // roughly scales
-    // on small screens keep fewer
-    particleCount = window.innerWidth < 768 ? Math.min(base, 18) : Math.min(base, 70);
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(createParticle());
-    }
-  }
+        function initParticles() {
+          particles = [];
+          // scale particle count by viewport size but keep it reasonable
+          const base = Math.max(
+            12,
+            Math.floor((window.innerWidth * window.innerHeight) / 120000)
+          ); // roughly scales
+          // on small screens keep fewer
+          particleCount =
+            window.innerWidth < 768 ? Math.min(base, 18) : Math.min(base, 70);
+          for (let i = 0; i < particleCount; i++) {
+            particles.push(createParticle());
+          }
+        }
 
-  function createParticle() {
-    // position (some spawn around hero center to look nice)
-    const x = rand(0, window.innerWidth);
-    const y = rand(0, window.innerHeight);
-    // velocity
-    const angle = rand(0, Math.PI * 2);
-    const speed = rand(0.05, 0.6);
-    // size
-    const size = rand(0.6, 3.6);
-    // life and alpha
-    const life = rand(80, 420);
-    const hue = rand(40, 50); // golden-yellow hue (approx)
-    const sat = rand(80, 100);
-    const light = rand(50, 65);
-    return { x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, size, life, age: 0, hue, sat, light, alpha: rand(0.08, 0.9) };
-  }
+        function createParticle() {
+          // position (some spawn around hero center to look nice)
+          const x = rand(0, window.innerWidth);
+          const y = rand(0, window.innerHeight);
+          // velocity
+          const angle = rand(0, Math.PI * 2);
+          const speed = rand(0.05, 0.6);
+          // size
+          const size = rand(0.6, 3.6);
+          // life and alpha
+          const life = rand(80, 420);
+          const hue = rand(40, 50); // golden-yellow hue (approx)
+          const sat = rand(80, 100);
+          const light = rand(50, 65);
+          return {
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            size,
+            life,
+            age: 0,
+            hue,
+            sat,
+            light,
+            alpha: rand(0.08, 0.9),
+          };
+        }
 
-  function update() {
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.age++;
-      // gentle gravity/float
-      p.vy += 0.002 * (p.size * 0.2);
-      // fade in/out based on age
-      p.alpha = Math.max(0, Math.sin((p.age / p.life) * Math.PI) * 0.95);
-      if (p.age > p.life || p.x < -50 || p.x > window.innerWidth + 50 || p.y < -50 || p.y > window.innerHeight + 50) {
-        // replace particle
-        particles[i] = createParticle();
+        function update() {
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.age++;
+            // gentle gravity/float
+            p.vy += 0.002 * (p.size * 0.2);
+            // fade in/out based on age
+            p.alpha = Math.max(0, Math.sin((p.age / p.life) * Math.PI) * 0.95);
+            if (
+              p.age > p.life ||
+              p.x < -50 ||
+              p.x > window.innerWidth + 50 ||
+              p.y < -50 ||
+              p.y > window.innerHeight + 50
+            ) {
+              // replace particle
+              particles[i] = createParticle();
+            }
+          }
+        }
+
+        function draw() {
+          // subtle clear with translucency to create trailing glow
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          ctx.globalCompositeOperation = "lighter";
+          for (const p of particles) {
+            const grad = ctx.createRadialGradient(
+              p.x,
+              p.y,
+              0,
+              p.x,
+              p.y,
+              p.size * 6
+            );
+            const color = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha})`;
+            grad.addColorStop(0, color);
+            grad.addColorStop(
+              0.3,
+              `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha * 0.6})`
+            );
+            grad.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.globalCompositeOperation = "source-over";
+        }
+
+        let rafId;
+        function loop() {
+          update();
+          draw();
+          rafId = requestAnimationFrame(loop);
+        }
+
+        // Pause animation when tab not visible (saves CPU)
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) cancelAnimationFrame(rafId);
+          else rafId = requestAnimationFrame(loop);
+        });
+
+        // initialize
+        window.addEventListener("resize", resize);
+        window.addEventListener("load", () => {
+          resize();
+          rafId = requestAnimationFrame(loop);
+        });
+
+        // optional: slow down on low power devices using prefers-reduced-motion
+        const q = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (q.matches) {
+          // drastically reduce animations
+          cancelAnimationFrame(rafId);
+          // create a few static, very subtle particles
+          particles = [];
+          for (let i = 0; i < 12; i++) {
+            particles.push(createParticle());
+          }
+          draw();
+        }
+      })();
+      const typingText = "Web Developer";
+      let index = 0;
+
+      function typeEffect() {
+        if (index < typingText.length) {
+          document.getElementById("typing-text").textContent +=
+            typingText.charAt(index);
+          index++;
+          setTimeout(typeEffect, 120);
+        }
       }
-    }
-  }
 
-  function draw() {
-    // subtle clear with translucency to create trailing glow
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.globalCompositeOperation = 'lighter';
-    for (const p of particles) {
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
-      const color = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha})`;
-      grad.addColorStop(0, color);
-      grad.addColorStop(0.3, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${p.alpha * 0.6})`);
-      grad.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalCompositeOperation = 'source-over';
-  }
-
-  let rafId;
-  function loop() {
-    update();
-    draw();
-    rafId = requestAnimationFrame(loop);
-  }
-
-  // Pause animation when tab not visible (saves CPU)
-  document.addEventListener('visibilitychange', function() {
-    if (document.hidden) cancelAnimationFrame(rafId);
-    else rafId = requestAnimationFrame(loop);
-  });
-
-  // initialize
-  window.addEventListener('resize', resize);
-  window.addEventListener('load', () => {
-    resize();
-    rafId = requestAnimationFrame(loop);
-  });
-
-  // optional: slow down on low power devices using prefers-reduced-motion
-  const q = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (q.matches) {
-    // drastically reduce animations
-    cancelAnimationFrame(rafId);
-    // create a few static, very subtle particles
-    particles = [];
-    for (let i = 0; i < 12; i++) {
-      particles.push(createParticle());
-    }
-    draw();
-  }
-})();
-const typingText = "Web Developer";
-let index = 0;
-
-function typeEffect() {
-  if (index < typingText.length) {
-    document.getElementById("typing-text").textContent += typingText.charAt(index);
-    index++;
-    setTimeout(typeEffect, 120);
-  }
-}
-
-window.addEventListener("load", typeEffect);
-
-</script>
-
-</body>
+      window.addEventListener("load", typeEffect);
+    </script>
+  </body>
 </html>
